@@ -22,6 +22,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "phone number is required"],
   },
+  answer: {
+      type: String,
+      required: [true, "Answer is required"],
+      trim: true,
+    },
   userType: {
     type: String,
     required: [true, "usertype is required"],

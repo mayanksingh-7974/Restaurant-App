@@ -5,10 +5,11 @@ import JWT from "jsonwebtoken";
 //register
 const registerController = async (req, res) => {
   try {
-    const { userName, email, password, phone, address } = req.body;
+    const { userName, email, password, phone, address,answer } = req.body;
     //validation
-    if (!userName || !email || !password || !address || !phone) {
-      return res.status(500).send({
+    if (!userName || !email || !password || !address || !phone ||
+      !answer) {
+      return res.status(400).send({
         success: false,
         message: "please provide all fields",
       });
@@ -32,6 +33,7 @@ const registerController = async (req, res) => {
       password: hashedPassword,
       phone,
       address,
+      answer,
     });
     res.status(201).send({
       success: true,
@@ -60,7 +62,7 @@ const loginController = async (req, res) => {
       });
     }
 
-    // Check user
+    // Find user
     const user = await userModel.findOne({ email });
 
     if (!user) {
